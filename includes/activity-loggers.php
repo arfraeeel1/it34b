@@ -1,5 +1,5 @@
 <?php
-    function logActivity($pdo, $userId, $email, $action, $status='success',) {
+    function logActivity($pdo, $userId, $user_email, $action, $status='success',) {
         try {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
 
@@ -22,10 +22,8 @@
             ");
 
         } catch (PDOException $e) {
-            // Handle the exception (e.g., log it, display an error message, etc.)
             error_log("Activity Log Error: " . $e->getMessage());
             return false;
         }
     }
-
 ?>    
