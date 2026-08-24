@@ -25,6 +25,18 @@
             ");
 
 
+            $success = $stmt->execute([
+                $user_id,
+                $user_email,
+                $action,
+                $status,
+                $ip,
+                $user_agent
+            ]);
+
+              return $success;
+
+
         } catch (PDOException $e){
             error_log("Activity Log Error: ". $e->getMessage());
             return false;
