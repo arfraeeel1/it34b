@@ -40,6 +40,7 @@
 
         } catch (PDOException $e){
             die("Activity Log Error: ". $e->getMessage());
+            return false;
         }
     }
 ?>
