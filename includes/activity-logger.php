@@ -1,3 +1,4 @@
+
 <?php
     function logActivity($pdo,$user_id,$user_email,$action, $status='success'){
         try{
@@ -19,7 +20,7 @@
                     user_email,
                     activity_log_action,
                     activity_log_status,
-                    activity_log_ip_address,
+                    activity_log_client_ip,
                     activity_log_user_agent
                 ) VALUES (?,?,?,?,?,?)
             ");
@@ -38,8 +39,7 @@
 
 
         } catch (PDOException $e){
-            error_log("Activity Log Error: ". $e->getMessage());
-            return false;
+            die("Activity Log Error: ". $e->getMessage());
         }
     }
 ?>

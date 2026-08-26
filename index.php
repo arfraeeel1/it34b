@@ -1,7 +1,7 @@
 <?php
 
-require_once'config/config.php';
-require_once'includes/activity-logger.php';
+require_once 'config/config.php';
+require_once 'includes/activity-logger.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = trim($_POST['action'] ?? '');
@@ -11,6 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,11 +20,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Document</title>
 </head>
 <body>
-    <form method="POST">
-        <button
-        type="submit"
-        name="action"
-    >ARF
-   </form>
+    <form method= "POST">
+        <button type="submit" name="action"
+        >Sample</button>
+    </form>
 </body>
 </html>
