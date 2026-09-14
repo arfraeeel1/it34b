@@ -1,7 +1,7 @@
 <?php
 
 function redirect($path){
-    header("Location: " . BASE_URL . $path);
+    header('Location: ' . BASE_URL . $path);
     exit;
 }
 
@@ -12,7 +12,7 @@ function loginUser($pdo, $login,$password){
     user_id,
     user_email,
     user_username,
-    user_password
+    user_password,
     user_role
     
     FROM users
@@ -39,8 +39,7 @@ function loginUser($pdo, $login,$password){
     $_SESSION['user_email']=$user['user_email'];
     $_SESSION['user_username']=$user['user_username'];
     $_SESSION['user_role']=$user['user_role'];
-
-    return true;
+     return true;
 }
 
 function requireLogin(){
