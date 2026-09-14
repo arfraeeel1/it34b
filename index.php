@@ -25,18 +25,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
           //Log incomplete login attempt
           logActivity($pdo, null, $login, 'login', 'failed');
 
-
+    }
     }else{
 
         if(loginUser($pdo, $login, $password)){
             //Log incomplete login attempt
-          
-            logActivity($pdo,,$_SESSION['user_id'],$_SESSION['user_email'],'login','success');
+            logActivity($pdo,$_SESSION['user_id'],$_SESSION['user_email'],'login','success');
+
+       
         header('Location: ' . BASE_URL . '/' . $_SESSION['user_role'] . '/index.php');
         exit;
     }
 }
-
 
 
 ?>
