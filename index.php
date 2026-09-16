@@ -1,67 +1,55 @@
 <?php
- require_once('config/config.php');
+require_once('config/config.php');
+require_once('config/functions.php');
 
- $user_id = "root" ?? "null";
-    $user_email = "root" ?? null;
+if (isset($_SESSION['user_id'])){
+    header('Location: ' . BASE_URL . '/' . $_SESSION['user_role'] . '/index.php');
+    exit;
+}
 
-    $buttons = [
-        'Login',
-        'Logout',
-        'Create Record',
-        'Update Record',
-        'Delete Record',
-        'View Record',
-        'Upload File',
-        'Download File',
-        'Download',
-        'Search',
-        'Generate Report',
-        
-    ];
+$error='';
 
-    ?>
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $login = trim($_POST['login'] ?? '');
+    $password = $_POST['password'] ?? '';
 
-    <table border ="1" cellpading ="10">
-        <tr>
-            <th>Action</th>
-            <th>Test</th>
-          </tr>
+    if(loginUser($pdo, $login, $password)){
+        logActivity($pdo, $_SESSION['user_id'], $_SESSION['user_email'], 'login', 'success');
+        header('Location: ' . BASE_URL . '/' . $_SESSION['user_role'] . '/index.php');
+        exit;
+    }
 
-              <?php foreach ($buttons as $button): ?>
-           <tr>
-                 <td><?= htmlspecialchars($button) ?></td>
-                 <td>
-                 <form method="post">
-                   <input type="hidden" name="action"
-                     value="<?= htmlspecialchars($button) ?>"
-                   >
-                  <button type="submit">Test</button>
-              </form>
-            </td>
-         </tr>
-    <?php endforeach; ?>
-</table>
+    $error = 'Invalid login credentials';
 
-<?php
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $action = $_POST['action'] ?? "test_activity";
-
-    $status = random_int(0,1) ===1? 'success' : 'failed';
-
-    $success = logActivity(
-        $pdo,
-        $user_id,
-        $user_email,
-        $action,
-        $status
-    );
-
-    if($success){
-        echo "<p>Activity: " . htmlspecialchars($action) .
-        "Status: " . htmlspecialchars($status) . 
-        "Log inserted successfully.</p>";
-    } else {
-        echo "<p>Failed to insert activity log.</p>";
+    if ($login === '' || $password === '') {
+        logActivity($pdo, null, $login, 'login', 'failed');
     }
 }
+
+
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <?php if($error): ?>
+        <p style="color:red;"><?php echo $error; ?></p>
+    <?php endif; ?>
+    <form method="POST" action="">
+        <label for="login">Email or Username:</label>
+        <input type="text" name="login" id="login" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+</body>
+</html>
