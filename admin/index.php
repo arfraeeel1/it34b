@@ -1,6 +1,5 @@
     <?php
     require_once'../config/config.php';
-    require_once'../config/functions.php';
 
     requireRole('admin');
 
@@ -24,7 +23,7 @@
     </head>
     <body>
         <h1>Welcome Admin</h1>
-        <a href=" ../../auth/signout.php">Sign Out</a>
+        <a href="../../auth/signout.php">Sign Out</a>
         <table id="example" class="table table-striped table-bordered" style="width:auto">
             <thead>
                 <tr>
@@ -61,7 +60,7 @@
     <script src="https://cdn.datatables.net/3.0.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
     new DataTable( '#example', {
-        scrollY: '400px',
+        scrollY: '500px',
         autoWidth: false
     } );
     </script>
