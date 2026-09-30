@@ -37,7 +37,7 @@ function loginUser($pdo, $login,$password){
 
     $_SESSION['session_id'] = startUserSession($pdo);
 
-     return true; 
+    return true; 
 }
 
 function requireLogin(){

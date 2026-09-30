@@ -23,7 +23,7 @@
     </head>
     <body>
         <h1>Welcome Admin</h1>
-        <a href="../../auth/signout.php">Sign Out</a>
+        <a href="../auth/signout.php">Sign Out</a>
         <table id="example" class="table table-striped table-bordered" style="width:auto">
             <thead>
                 <tr>
